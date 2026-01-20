@@ -9,8 +9,8 @@ using namespace std;
 using namespace chrono;
 
 
-////////////////////////////  ×°¼×°åÊ¶±ğ¿¼ºËÌâ  //////////////////////////////
-////Õâ¶ÎÓÃÁËAIÀ´¶Ô×°¼×°åÖĞĞÄµãÎ»ÖÃ½øĞĞÔ¤²â£¬ÒÔÊµÏÖ¸üÆ½»¬µÄÎ»ÖÃ¸ú×Ù
+////////////////////////////  è£…ç”²æ¿è¯†åˆ«è€ƒæ ¸é¢˜  //////////////////////////////
+////å¯¹è£…ç”²æ¿ä¸­å¿ƒç‚¹ä½ç½®è¿›è¡Œé¢„æµ‹ï¼Œä»¥å®ç°æ›´å¹³æ»‘çš„ä½ç½®è·Ÿè¸ª
 //Point predictPosition(const vector<Point>& previousPositions) {
 //    if (previousPositions.empty()) {
 //        return Point(0, 0);
@@ -23,9 +23,9 @@ using namespace chrono;
 //}
 //
 //int main() {
-//    VideoCapture cap("D:/ÔÓÎï¡¢ÎÄ¼ş/×°¼×°å - ºì.mp4");
+//    VideoCapture cap("D:/æ‚ç‰©ã€æ–‡ä»¶/è£…ç”²æ¿ - çº¢.mp4");
 //    if (!cap.isOpened()) {
-//        cout << "ÎŞ·¨´ò¿ªÊÓÆµ£¡!" << endl;
+//        cout << "æ— æ³•æ‰“å¼€è§†é¢‘ï¼!" << endl;
 //        return -1;
 //    }
 //
@@ -41,12 +41,12 @@ using namespace chrono;
 //            break;
 //        }
 //
-//        // ¸ßË¹Ä£ºıÒÔ¼õÉÙÔëÉù
+//        // é«˜æ–¯æ¨¡ç³Šä»¥å‡å°‘å™ªå£°
 //        GaussianBlur(frame, frame, Size(5, 5), 0);
 //        Mat hsv;
 //        cvtColor(frame, hsv, COLOR_BGR2HSV);
 //
-//        // ¶¨ÒåÑÕÉ«·¶Î§
+//        // å®šä¹‰é¢œè‰²èŒƒå›´
 //        Scalar lower_red1(0, 100, 100);
 //        Scalar upper_red1(10, 255, 255);
 //        Scalar lower_red2(160, 100, 100);
@@ -54,7 +54,7 @@ using namespace chrono;
 //        Scalar lower_blue(100, 100, 100);
 //        Scalar upper_blue(130, 255, 255);
 //
-//        // Éú³ÉÑÚÄ¤
+//        // ç”Ÿæˆæ©è†œ
 //        Mat mask_red1, mask_red2, mask_blue;
 //        inRange(hsv, lower_red1, upper_red1, mask_red1);
 //        inRange(hsv, lower_red2, upper_red2, mask_red2);
@@ -63,48 +63,48 @@ using namespace chrono;
 //        add(mask_red1, mask_red2, mask_combined);
 //        add(mask_combined, mask_blue, mask_combined);
 //
-//        // ÇÖÊ´ºÍÀ©´óÒÔÅÅ³ıĞ¡Ôëµã
+//        // ä¾µèš€å’Œæ‰©å¤§ä»¥æ’é™¤å°å™ªç‚¹
 //        erode(mask_combined, mask_combined, Mat(), Point(-1, -1), 2);
 //        dilate(mask_combined, mask_combined, Mat(), Point(-1, -1), 2);
-//        //ÕÒ³öÂÖÀª
+//        //æ‰¾å‡ºè½®å»“
 //        vector<vector<Point>> contours;
 //        findContours(mask_combined, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-//        //¹ıÂËºóÂÖÀª
+//        //è¿‡æ»¤åè½®å»“
 //        vector<vector<Point>> filteredContours;
-//        //ÉèÖÃ×îĞ¡Ãæ»ı¼õÉÙÆäËûµÆ¹â¶ÔÓÚ½á¹ûµÄ¸ÉÈÅ
+//        //è®¾ç½®æœ€å°é¢ç§¯å‡å°‘å…¶ä»–ç¯å…‰å¯¹äºç»“æœçš„å¹²æ‰°
 //        const double minArea = 500; 
 //        for (const auto& contour : contours) {
 //            if (contourArea(contour) > minArea) {
 //                filteredContours.push_back(contour);
 //            }
 //        }
-//        //±£Ö¤ÕÒ³öÁ½ÌõµÆÌõºó¿ªÊ¼¼ÆËã
+//        //ä¿è¯æ‰¾å‡ºä¸¤æ¡ç¯æ¡åå¼€å§‹è®¡ç®—
 //        if (filteredContours.size() >= 2) {
-//            // ¼ÆËãµÆÌõµÄ±ß½ç¾ØĞÎ
+//            // è®¡ç®—ç¯æ¡çš„è¾¹ç•ŒçŸ©å½¢
 //            Rect rect1 = boundingRect(filteredContours[0]);
 //            Rect rect2 = boundingRect(filteredContours[1]);
-//            //ÕÒ³öµÆÌõ¾ØĞÎÖĞĞÄµã
+//            //æ‰¾å‡ºç¯æ¡çŸ©å½¢ä¸­å¿ƒç‚¹
 //            Point center1 = (rect1.tl() + rect1.br()) / 2;
 //            Point center2 = (rect2.tl() + rect2.br()) / 2;
 //
-//            // ¼ÆËãÖĞ¼äÇøÓòµÄ¾ØĞÎ¿ò
+//            // è®¡ç®—ä¸­é—´åŒºåŸŸçš„çŸ©å½¢æ¡†
 //            int left = min(rect1.x, rect2.x);
 //            int top = min(rect1.y, rect2.y);
 //            int right = max(rect1.x + rect1.width, rect2.x + rect2.width);
 //            int bottom = max(rect1.y + rect1.height, rect2.y + rect2.height);
 //            Rect combinedRect(left, top, right - left, bottom - top);
 //
-//            // »æÖÆ¾ØĞÎ¿ò
-//            rectangle(frame, combinedRect, Scalar(255, 0, 0), 2); // ÖĞ¼äÇøÓò¿ò
-//            rectangle(frame, rect1, Scalar(0, 255, 0), 2); // µÚÒ»¸öµÆÌõ¿ò
-//            rectangle(frame, rect2, Scalar(0, 255, 0), 2); // µÚ¶ş¸öµÆÌõ¿ò
-//            //ÕÒ³ö×°¼×°åÖĞĞÄµã
+//            // ç»˜åˆ¶çŸ©å½¢æ¡†
+//            rectangle(frame, combinedRect, Scalar(255, 0, 0), 2); // ä¸­é—´åŒºåŸŸæ¡†
+//            rectangle(frame, rect1, Scalar(0, 255, 0), 2); // ç¬¬ä¸€ä¸ªç¯æ¡æ¡†
+//            rectangle(frame, rect2, Scalar(0, 255, 0), 2); // ç¬¬äºŒä¸ªç¯æ¡æ¡†
+//            //æ‰¾å‡ºè£…ç”²æ¿ä¸­å¿ƒç‚¹
 //            previousPositions.push_back((center1 + center2) / 2);
 //            if (previousPositions.size() > historySize) {
 //                previousPositions.erase(previousPositions.begin());
 //            }
 //
-//            // »æÖÆÖĞĞÄµã
+//            // ç»˜åˆ¶ä¸­å¿ƒç‚¹
 //            Point armorCenter = (center1 + center2) / 2;
 //            circle(frame, armorCenter, 3, Scalar(0, 255, 0), -1);
 //        }
@@ -123,26 +123,26 @@ using namespace chrono;
 
 
 
-/////////////////  opencv»ù´¡µÚÒ»Ìâ  ////////////////
+/////////////////  opencvåŸºç¡€ç¬¬ä¸€é¢˜  ////////////////
 //int main() {
-//    // ¶ÁÈ¡Ô­Í¼
-//    Mat image = imread("D:/ÔÓÎï¡¢ÎÄ¼ş/opencv»ù´¡µÚÒ»Ìâ.png");
+//    // è¯»å–åŸå›¾
+//    Mat image = imread("D:/æ‚ç‰©ã€æ–‡ä»¶/opencvåŸºç¡€ç¬¬ä¸€é¢˜.png");
 //    if (image.empty()) {
-//        std::cerr << "´ò¿ªÍ¼ÏñÊ§°Ü!" << std::endl;
+//        std::cerr << "æ‰“å¼€å›¾åƒå¤±è´¥!" << std::endl;
 //        return -1;
 //    }
 //
-//    // É«²Ê·Ö¸î£¨ÌáÈ¡ºìÉ«ÇøÓò£©
+//    // è‰²å½©åˆ†å‰²ï¼ˆæå–çº¢è‰²åŒºåŸŸï¼‰
 //    Mat hsv_image, mask;
 //    cvtColor(image, hsv_image, COLOR_BGR2HSV);
 //
-//    // ¶¨ÒåºìÉ«·¶Î§
-//    Scalar lower_red1(0, 100, 100);   // ºìÉ«µÄÏÂãĞÖµ
-//    Scalar upper_red1(10, 255, 255);  // ºìÉ«µÄÉÏãĞÖµ
-//    Scalar lower_red2(160, 100, 100); // ºìÉ«µÄÏÂãĞÖµ£¨¸ß·¶Î§£©
-//    Scalar upper_red2(180, 255, 255); // ºìÉ«µÄÉÏãĞÖµ£¨¸ß·¶Î§£©
+//    // å®šä¹‰çº¢è‰²èŒƒå›´
+//    Scalar lower_red1(0, 100, 100);   // çº¢è‰²çš„ä¸‹é˜ˆå€¼
+//    Scalar upper_red1(10, 255, 255);  // çº¢è‰²çš„ä¸Šé˜ˆå€¼
+//    Scalar lower_red2(160, 100, 100); // çº¢è‰²çš„ä¸‹é˜ˆå€¼ï¼ˆé«˜èŒƒå›´ï¼‰
+//    Scalar upper_red2(180, 255, 255); // çº¢è‰²çš„ä¸Šé˜ˆå€¼ï¼ˆé«˜èŒƒå›´ï¼‰
 //
-//    // Í¨¹ıÑÚÄ¤½«Í¼Ïñ¶şÖµ»¯
+//    // é€šè¿‡æ©è†œå°†å›¾åƒäºŒå€¼åŒ–
 //    Mat mask1, mask2;
 //    inRange(hsv_image, lower_red1, upper_red1, mask1);
 //    inRange(hsv_image, lower_red2, upper_red2, mask2);
@@ -150,32 +150,32 @@ using namespace chrono;
 //    Mat binary_image;
 //    mask.convertTo(binary_image, CV_8U);
 //
-//    // ±ßÔµÌáÈ¡
+//    // è¾¹ç¼˜æå–
 //    Mat edges;
 //    Canny(binary_image, edges, 100, 200);
 //
-//    // ´´½¨Ò»¸ö¿ÕµÄºÚÉ«±³¾°
+//    // åˆ›å»ºä¸€ä¸ªç©ºçš„é»‘è‰²èƒŒæ™¯
 //    Mat edge_image = Mat::zeros(image.size(), CV_8UC3);
 //
-//    // ½«±ßÔµ»æÖÆÎªÀ¶É«
+//    // å°†è¾¹ç¼˜ç»˜åˆ¶ä¸ºè“è‰²
 //    Mat colored_edges;
 //    cvtColor(edges, colored_edges, COLOR_GRAY2BGR);
 //    colored_edges.setTo(Scalar(255, 0, 0), edges);
 //
-//    // ÏÔÊ¾Ô­Í¼
+//    // æ˜¾ç¤ºåŸå›¾
 //    namedWindow("Original Image", WINDOW_NORMAL);
 //    resizeWindow("Original Image", 1280, 720);
 //    imshow("Original Image", image);
-//    // ÏÔÊ¾ºÚ°×Í¼
+//    // æ˜¾ç¤ºé»‘ç™½å›¾
 //    namedWindow("Binary Image", WINDOW_NORMAL);
 //    resizeWindow("Binary Image", 1280, 720);
 //    imshow("Binary Image", binary_image);
-//    //  ÏÔÊ¾À¶É«±ßÔµÍ¼Ïñ
+//    //  æ˜¾ç¤ºè“è‰²è¾¹ç¼˜å›¾åƒ
 //    namedWindow("Edges", WINDOW_NORMAL);
 //    resizeWindow("Edges", 1280, 720);
 //    imshow("Edges", colored_edges);
 //
-//    // ±£´æÀ¶É«±ßÔµÍ¼Ïñ
+//    // ä¿å­˜è“è‰²è¾¹ç¼˜å›¾åƒ
 //    imwrite("edges_image.png", colored_edges);
 //
 //    waitKey(0);
@@ -183,64 +183,64 @@ using namespace chrono;
 //}
 
 
-/////////////////  opencv»ù´¡µÚÈıÌâ  ////////////////
+/////////////////  opencvåŸºç¡€ç¬¬ä¸‰é¢˜  ////////////////
 //
-//Rect selection; //Ñ¡ÖĞµÄ¾ØĞÎÇøÓò
-//Point origin;  //Êó±ê°´ÏÂÆğÊ¼µã
-//bool selecting = false;  //ÓÃÓÚÅĞ¶ÏÊó±êÊé·ñ°´ÏÂ
+//Rect selection; //é€‰ä¸­çš„çŸ©å½¢åŒºåŸŸ
+//Point origin;  //é¼ æ ‡æŒ‰ä¸‹èµ·å§‹ç‚¹
+//bool selecting = false;  //ç”¨äºåˆ¤æ–­é¼ æ ‡ä¹¦å¦æŒ‰ä¸‹
 //
-//     //Êó±ê»Øµ÷º¯Êı
+//     //é¼ æ ‡å›è°ƒå‡½æ•°
 //void onMouse(int event, int x, int y, int flags, void* param) {
-//    Mat* img = (Mat*)param;  //½«paramÖ¸Õë×ªÎªÖ¸Ïòimg
-//    //Êó±êµã»÷¼ì²â
+//    Mat* img = (Mat*)param;  //å°†paramæŒ‡é’ˆè½¬ä¸ºæŒ‡å‘img
+//    //é¼ æ ‡ç‚¹å‡»æ£€æµ‹
 //    if (event == EVENT_LBUTTONDOWN) {
 //        origin = Point(x, y);
 //        selection = Rect(x, y, 0, 0);
 //        selecting = true;
-//    }//Êó±êÍÏ¶¯¼ì²â
+//    }//é¼ æ ‡æ‹–åŠ¨æ£€æµ‹
 //    else if (event == EVENT_MOUSEMOVE) {
 //        if (selecting) {
 //            selection.width = x - origin.x;
 //            selection.height = y - origin.y;
-//            Mat temp = img->clone(); //¿ËÂ¡µ±Ç°Í¼Ïñ
+//            Mat temp = img->clone(); //å…‹éš†å½“å‰å›¾åƒ
 //            rectangle(temp, selection, Scalar(255, 0, 0), 1);
 //            imshow("Image", temp);
 //
-//            // ÏÔÊ¾Êó±êµ±Ç°×ø±êºÍRGBÖµ
+//            // æ˜¾ç¤ºé¼ æ ‡å½“å‰åæ ‡å’ŒRGBå€¼
 //            if (x >= 0 && y >= 0 && x < img->cols && y < img->rows) {
 //                Vec3b pixel = img->at<Vec3b>(Point(x, y));
 //                cout << "RGB: (" << (int)pixel[2] << ", " << (int)pixel[1] << ", " << (int)pixel[0] << ") "
-//                    << "×ø±ê: (" << x << ", " << y << ")\r";
+//                    << "åæ ‡: (" << x << ", " << y << ")\r";
 //                cout.flush();
 //            }
 //        }
-//    }//Êó±êËÉ¿ª¼ì²â
+//    }//é¼ æ ‡æ¾å¼€æ£€æµ‹
 //    else if (event == EVENT_LBUTTONUP) {
 //        selecting = false;
-//        // ÔÚ´ÓÓÒÍù×ó»ò´ÓÏÂÍùÉÏÑ¡È¡Ê±½«¾ØĞÎ·­×ªÒÔ±£Ö¤¾ØĞÎ×ø±êºÍ¿í¸ßÎªÕıÖµ 
+//        // åœ¨ä»å³å¾€å·¦æˆ–ä»ä¸‹å¾€ä¸Šé€‰å–æ—¶å°†çŸ©å½¢ç¿»è½¬ä»¥ä¿è¯çŸ©å½¢åæ ‡å’Œå®½é«˜ä¸ºæ­£å€¼ 
 //        if (selection.width < 0) {
-//            selection.x += selection.width;//µ÷Õû×óÉÏ½Çx×ø±ê
-//            selection.width *= -1; //¿í¶ÈÈ¡¾ø¶ÔÖµ
+//            selection.x += selection.width;//è°ƒæ•´å·¦ä¸Šè§’xåæ ‡
+//            selection.width *= -1; //å®½åº¦å–ç»å¯¹å€¼
 //        }
 //        if (selection.height < 0) {
-//            selection.y += selection.height; // µ÷Õû×óÉÏ½Çy×ø±ê
-//            selection.height *= -1; // ¸ß¶ÈÈ¡¾ø¶ÔÖµ
+//            selection.y += selection.height; // è°ƒæ•´å·¦ä¸Šè§’yåæ ‡
+//            selection.height *= -1; // é«˜åº¦å–ç»å¯¹å€¼
 //        }
 //
-//        // ²Ã¼ô
+//        // è£å‰ª
 //        Mat cropped = (*img)(selection);
 //        imshow("Cropped Image", cropped);
 //
-//        // Êä³ö¿òÖĞĞÄÏñËØµã×ø±ê
+//        // è¾“å‡ºæ¡†ä¸­å¿ƒåƒç´ ç‚¹åæ ‡
 //        Point center = Point(selection.x + selection.width / 2, selection.y + selection.height / 2);
-//        cout << "¿òÖĞĞÄÏñËØµã×ø±ê: (" << center.x << ", " << center.y << ")" << endl;
+//        cout << "æ¡†ä¸­å¿ƒåƒç´ ç‚¹åæ ‡: (" << center.x << ", " << center.y << ")" << endl;
 //    }
 //}
 //
 //int main() {
-//    Mat img = imread("D:/ÔÓÎï¡¢ÎÄ¼ş/opencv»ù´¡µÚÈıÌâ.png");
+//    Mat img = imread("D:/æ‚ç‰©ã€æ–‡ä»¶/opencvåŸºç¡€ç¬¬ä¸‰é¢˜.png");
 //    if (img.empty()) {
-//        cout << "´ò¿ªÍ¼ÏñÊ§°Ü!" << endl;
+//        cout << "æ‰“å¼€å›¾åƒå¤±è´¥!" << endl;
 //        return -1;
 //    }
 //
@@ -254,35 +254,35 @@ using namespace chrono;
 
 
 
-/////////////////  opencv»ù´¡µÚ¶şÌâ£¨Ã»À´µÃ¼°´òÓ¡±ê¶¨°å£©  ////////////////
+/////////////////  opencvåŸºç¡€ç¬¬äºŒé¢˜ï¼ˆæ²¡æ¥å¾—åŠæ‰“å°æ ‡å®šæ¿ï¼‰  ////////////////
 //
 //int main() {
 //    VideoCapture cap(0);
 //    if (!cap.isOpened()) {
-//        cout << "ÎŞ·¨´ò¿ªÉãÏñÍ·£¡" << endl;
+//        cout << "æ— æ³•æ‰“å¼€æ‘„åƒå¤´ï¼" << endl;
 //        return -1;
 //    }
 //
-//    // »ñÈ¡ÊÓÆµµÄ¿í¶È¸ß¶ÈºÍÖ¡ÂÊ
+//    // è·å–è§†é¢‘çš„å®½åº¦é«˜åº¦å’Œå¸§ç‡
 //    int width = static_cast<int>(cap.get(CAP_PROP_FRAME_WIDTH));
 //    int height = static_cast<int>(cap.get(CAP_PROP_FRAME_HEIGHT));
 //    int fps = static_cast<int>(cap.get(CAP_PROP_FPS));
 //
-//    cout << "ÊÓÆµÍ¼Ïñ´óĞ¡: " << width << "x" << height << endl;
-//    cout << "Ö¡ÂÊ (FPS): " << fps << endl;
+//    cout << "è§†é¢‘å›¾åƒå¤§å°: " << width << "x" << height << endl;
+//    cout << "å¸§ç‡ (FPS): " << fps << endl;
 // 
 //    namedWindow("Camera", WINDOW_AUTOSIZE);
 //
-//    // ´´½¨»¬¶¯Ìõ
+//    // åˆ›å»ºæ»‘åŠ¨æ¡
 //    int exposure = 0;
 //    int brightness = 0;
-//    createTrackbar("ÆØ¹âÊ±¼ä", "Camera", &exposure, 100);
-//    createTrackbar("ÁÁ¶È", "Camera", &brightness, 100);
+//    createTrackbar("æ›å…‰æ—¶é—´", "Camera", &exposure, 100);
+//    createTrackbar("äº®åº¦", "Camera", &brightness, 100);
 //
-//    // ÊÓÆµÂ¼ÖÆÉèÖÃ
+//    // è§†é¢‘å½•åˆ¶è®¾ç½®
 //    VideoWriter writer("output.avi", VideoWriter::fourcc('M', 'J', 'P', 'G'), fps, Size(width, height));
 //    if (!writer.isOpened()) {
-//        cout << "ÎŞ·¨´ò¿ªÊÓÆµĞ´Èë£¡" << endl;
+//        cout << "æ— æ³•æ‰“å¼€è§†é¢‘å†™å…¥ï¼" << endl;
 //        return -1;
 //    }
 //
@@ -290,7 +290,7 @@ using namespace chrono;
 //    while (true) {
 //        cap >> frame;
 //        if (frame.empty()) break;
-//        // ÉèÖÃÆØ¹âºÍÁÁ¶È
+//        // è®¾ç½®æ›å…‰å’Œäº®åº¦
 //        cap.set(CAP_PROP_EXPOSURE, exposure / 10.0);
 //        frame.convertTo(frame, -1, 1, brightness);
 //        imshow("Camera", frame);
@@ -306,20 +306,20 @@ using namespace chrono;
 //}
 
 
-/////////////////  opencvÓ¦ÓÃµÚÒ»Ìâ  ////////////////
+/////////////////  opencvåº”ç”¨ç¬¬ä¸€é¢˜  ////////////////
 
 //int main() {
-//    Mat image = imread("D:/ÔÓÎï¡¢ÎÄ¼ş/opencvÓ¦ÓÃµÚÒ»Ìâ.png");
+//    Mat image = imread("D:/æ‚ç‰©ã€æ–‡ä»¶/opencvåº”ç”¨ç¬¬ä¸€é¢˜.png");
 //    if (image.empty()) {
 //        cout << "Could not open or find the image!" << endl;
 //        return -1;
 //    }
 //
-//    //±ä»»ÎªHSV
+//    //å˜æ¢ä¸ºHSV
 //    Mat hsvImage;
 //    cvtColor(image, hsvImage, COLOR_BGR2HSV);
 //
-//    // ´´½¨ºìÉ«ÑÚÄ¤
+//    // åˆ›å»ºçº¢è‰²æ©è†œ
 //    Scalar lowerRed(0, 100, 100);
 //    Scalar upperRed(10, 255, 255);
 //    Mat mask1;
@@ -329,18 +329,18 @@ using namespace chrono;
 //    Mat mask2;
 //    inRange(hsvImage, lowerRed, upperRed, mask2);
 //    Mat mask = mask1 | mask2;
-//    //²éÕÒÂÖÀª
+//    //æŸ¥æ‰¾è½®å»“
 //    vector<vector<Point>> contours;
 //    findContours(mask, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 //
 //    if (!contours.empty()) {
-//        // ÕÒµ½×î´óµÄÂÖÀª
+//        // æ‰¾åˆ°æœ€å¤§çš„è½®å»“
 //        auto largestContour = max_element(contours.begin(), contours.end(), [](const vector<Point>& a, const vector<Point>& b) {
 //            return contourArea(a) < contourArea(b);
 //            });
-//        //»æÖÆÂÖÀª  
+//        //ç»˜åˆ¶è½®å»“  
 //        drawContours(image, contours, distance(contours.begin(), largestContour), Scalar(255, 0, 0), 2);  
-//        //»æÖÆ¾ØĞÎ
+//        //ç»˜åˆ¶çŸ©å½¢
 //        Rect boundingBox = boundingRect(*largestContour);
 //        rectangle(image, boundingBox, Scalar(0, 255, 0), 2);
 //    }
@@ -353,17 +353,17 @@ using namespace chrono;
 
 
 
-/////////////////// ÈüÊÂÌâµÚ¶şÌâ ////////////////////
+/////////////////// èµ›äº‹é¢˜ç¬¬äºŒé¢˜ ////////////////////
 //
-//// ¼ÆËãÂÖÀªµÄÖĞĞÄµã
+//// è®¡ç®—è½®å»“çš„ä¸­å¿ƒç‚¹
 //Point2f findCenter(const vector<Point>& points) {
 //    Moments m = moments(points, true);
 //    return Point2f(m.m10 / m.m00, m.m01 / m.m00);
 //}
 //
-//// ¼ÆËãĞı×ª·½Ïò£¨ÖĞÎÄÏÔÊ¾»áÏÔÊ¾ÎªÎÊºÅ£©
+//// è®¡ç®—æ—‹è½¬æ–¹å‘ï¼ˆä¸­æ–‡æ˜¾ç¤ºä¼šæ˜¾ç¤ºä¸ºé—®å·ï¼‰
 //string determineRotationDirection(const Point2f& prev, const Point2f& curr) {
-//    // ÅĞ¶Ïµ±Ç°ÖĞĞÄµãºÍÉÏÒ»¸öÖĞĞÄµãµÄy×ø±ê£¬È·¶¨Ğı×ª·½Ïò
+//    // åˆ¤æ–­å½“å‰ä¸­å¿ƒç‚¹å’Œä¸Šä¸€ä¸ªä¸­å¿ƒç‚¹çš„yåæ ‡ï¼Œç¡®å®šæ—‹è½¬æ–¹å‘
 //    if (curr.y < prev.y) {
 //        return "Clockwise";
 //    }
@@ -373,18 +373,18 @@ using namespace chrono;
 //}
 //
 //int main() {
-//    VideoCapture capture("D:/ÔÓÎï¡¢ÎÄ¼ş/ÄÜÁ¿»ú¹Ø-ºì.mp4");
+//    VideoCapture capture("D:/æ‚ç‰©ã€æ–‡ä»¶/èƒ½é‡æœºå…³-çº¢.mp4");
 //    if (!capture.isOpened()) { 
-//        cout << "´ò¿ªÊÓÆµÊ§°Ü" << endl;
+//        cout << "æ‰“å¼€è§†é¢‘å¤±è´¥" << endl;
 //        return -1; 
 //    }
 //
 //
-//    Mat frame; // ÓÃÓÚ´æ´¢Ã¿Ò»Ö¡Í¼Ïñ
-//    Point2f prevCenter; // ÉÏÒ»Ö¡µÄÖĞĞÄµã
-//    bool firstFrame = true; // ±ê¼ÇÊÇ·ñÎªµÚÒ»Ö¡
-//    string rotationDirection; // ´æ´¢Ğı×ª·½Ïò
-//    bool directionDetermined = false; // ÊÇ·ñÒÑÈ·¶¨Ğı×ª·½Ïò
+//    Mat frame; // ç”¨äºå­˜å‚¨æ¯ä¸€å¸§å›¾åƒ
+//    Point2f prevCenter; // ä¸Šä¸€å¸§çš„ä¸­å¿ƒç‚¹
+//    bool firstFrame = true; // æ ‡è®°æ˜¯å¦ä¸ºç¬¬ä¸€å¸§
+//    string rotationDirection; // å­˜å‚¨æ—‹è½¬æ–¹å‘
+//    bool directionDetermined = false; // æ˜¯å¦å·²ç¡®å®šæ—‹è½¬æ–¹å‘
 //
 //
 //    while (true) {
@@ -392,39 +392,39 @@ using namespace chrono;
 //        if (frame.empty()) { 
 //            break;
 //        }
-//        //Í¼Ïñ´¦Àí£¨»Ò¶È¡¢¸ßË¹Ä£ºı¡¢±ßÔµ¼ì²â£©
+//        //å›¾åƒå¤„ç†ï¼ˆç°åº¦ã€é«˜æ–¯æ¨¡ç³Šã€è¾¹ç¼˜æ£€æµ‹ï¼‰
 //        Mat gray, blurred, edged;
 //        cvtColor(frame, gray, COLOR_BGR2GRAY);
 //        GaussianBlur(gray, blurred, Size(5, 5), 0);
 //        Canny(blurred, edged, 50, 150);
 //
-//        vector<vector<Point>> contours; // ÓÃvectorÀ´´æ´¢¼ì²âµ½µÄÂÖÀª£¨¶à¸öµã£©
-//        findContours(edged, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE); // ²éÕÒÂÖÀª
+//        vector<vector<Point>> contours; // ç”¨vectoræ¥å­˜å‚¨æ£€æµ‹åˆ°çš„è½®å»“ï¼ˆå¤šä¸ªç‚¹ï¼‰
+//        findContours(edged, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE); // æŸ¥æ‰¾è½®å»“
 //
 //
 //        for (const auto& contour : contours) {
-//            if (contourArea(contour) > 500) { // ¹ıÂËµôÃæ»ıĞ¡ÓÚ500µÄÂÖÀª£¨ÅÅ³ı¸ÉÈÅ£©
-//                Point2f currCenter = findCenter(contour); // »ñÈ¡µ±Ç°ÂÖÀªµÄÖĞĞÄµã
-//                drawContours(frame, contours, -1, Scalar(0, 255, 0), 2); // »æÖÆÂÖÀª
-//                circle(frame, currCenter, 5, Scalar(255, 0, 0), -1); // ÔÚÖĞĞÄµã»æÖÆÔ²È¦
+//            if (contourArea(contour) > 500) { // è¿‡æ»¤æ‰é¢ç§¯å°äº500çš„è½®å»“ï¼ˆæ’é™¤å¹²æ‰°ï¼‰
+//                Point2f currCenter = findCenter(contour); // è·å–å½“å‰è½®å»“çš„ä¸­å¿ƒç‚¹
+//                drawContours(frame, contours, -1, Scalar(0, 255, 0), 2); // ç»˜åˆ¶è½®å»“
+//                circle(frame, currCenter, 5, Scalar(255, 0, 0), -1); // åœ¨ä¸­å¿ƒç‚¹ç»˜åˆ¶åœ†åœˆ
 //
-//                // ÅĞ¶ÏĞı×ª·½Ïò
-//                if (!firstFrame && !directionDetermined) { // µ±·ÇµÚÒ»Ö¡ÇÒ·½ÏòÎ´È·¶¨
-//                    rotationDirection = determineRotationDirection(prevCenter, currCenter); // È·¶¨Ğı×ª·½Ïò
-//                    directionDetermined = true; // ±ê¼Ç·½ÏòÒÑÈ·¶¨
+//                // åˆ¤æ–­æ—‹è½¬æ–¹å‘
+//                if (!firstFrame && !directionDetermined) { // å½“éç¬¬ä¸€å¸§ä¸”æ–¹å‘æœªç¡®å®š
+//                    rotationDirection = determineRotationDirection(prevCenter, currCenter); // ç¡®å®šæ—‹è½¬æ–¹å‘
+//                    directionDetermined = true; // æ ‡è®°æ–¹å‘å·²ç¡®å®š
 //                }
-//                // ·ÀÖ¹¿ªÍ·ÎóÅĞ
-//                else if (firstFrame) { // Èç¹ûÊÇµÚÒ»Ö¡
-//                    firstFrame = false; // ±ê¼ÇÎª·ÇµÚÒ»Ö¡
+//                // é˜²æ­¢å¼€å¤´è¯¯åˆ¤
+//                else if (firstFrame) { // å¦‚æœæ˜¯ç¬¬ä¸€å¸§
+//                    firstFrame = false; // æ ‡è®°ä¸ºéç¬¬ä¸€å¸§
 //                }
-//                // ¸üĞÂÉÏÒ»Ö¡µÄÖĞĞÄµã
+//                // æ›´æ–°ä¸Šä¸€å¸§çš„ä¸­å¿ƒç‚¹
 //                prevCenter = currCenter;
 //            }
 //        }
 //
-//        // ÏÔÊ¾Ğı×ª·½Ïò
+//        // æ˜¾ç¤ºæ—‹è½¬æ–¹å‘
 //        if (directionDetermined) { 
-//            putText(frame, "Rotation Direction: " + rotationDirection, Point(10, 30), FONT_HERSHEY_SIMPLEX, 1, Scalar(255, 255, 255), 2);//ÖĞÎÄÍ¨¹ıputTextÏÔÊ¾»áÈ«ÊÇÎÊºÅ£¬ËùÒÔ¸Ä³ÉÓ¢ÎÄÁË¡£
+//            putText(frame, "Rotation Direction: " + rotationDirection, Point(10, 30), FONT_HERSHEY_SIMPLEX, 1, Scalar(255, 255, 255), 2);//ä¸­æ–‡é€šè¿‡putTextæ˜¾ç¤ºä¼šå…¨æ˜¯é—®å·ï¼Œæ‰€ä»¥æ”¹æˆè‹±æ–‡äº†ã€‚
 //        }
 //
 //        imshow("Recognition Result", frame);
@@ -433,4 +433,5 @@ using namespace chrono;
 //
 //    capture.release();
 //    return 0;
+
 //}
